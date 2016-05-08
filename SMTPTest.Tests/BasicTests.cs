@@ -15,7 +15,7 @@ using System.Collections.Concurrent;
 namespace SMTPTest.Tests
 {
     [TestFixture]
-    public class TestParse
+    public class BasicTests
     {
 
         private class MockStore : IMailReciever

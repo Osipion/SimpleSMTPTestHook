@@ -14,6 +14,13 @@ namespace SMTPTest.API
         public Uri Url { get; }
         private readonly ISMTPTestService service;
 
+        public static HttpBindingBase DefaultBinding { get; } = new NetHttpBinding(BasicHttpSecurityMode.None)
+        {
+            MaxReceivedMessageSize = int.MaxValue,
+            ReceiveTimeout = TimeSpan.FromSeconds(10) 
+        };
+
+
         public SMTPApiClient(HttpBindingBase binding, Uri url)
         {
             if (url == null) throw new ArgumentNullException(nameof(url));
@@ -24,7 +31,10 @@ namespace SMTPTest.API
             var address = new EndpointAddress(this.Url);
             var cf = new ChannelFactory<ISMTPTestService>(binding, address);
             this.service = cf.CreateChannel();
+            
         }
+
+
 
 
         #region IDisposable Support

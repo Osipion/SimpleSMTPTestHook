@@ -20,11 +20,13 @@ namespace TestClient
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Press Q to exit, M to send a test email, H to show this help, 
 or one of the following api options:
-    1 <recipient address part> - most 10 recent mail matching 
-                                 recipient address part. Can 
-                                 be regex.
-    2                          - all mail in last 5 minutes
-    3                          - all mail in last 30 seconds
+    1 <recipient address part> - list the 10 most recent mail items 
+                                 matching the argument
+                                 <recipient address part>. Can be a 
+                                 regex, no quotes required (argument 
+                                 is everything after first space).
+    2                          - all mail recieved in last 5 minutes
+    3                          - all mail recieved in last 30 seconds
 ";
 
             var apiUrl = Properties.Settings.Default.SMTPApiUrl;
@@ -34,7 +36,9 @@ or one of the following api options:
 
             Console.WriteLine(HELP);
 
-            using (var apiClient = new SMTPApiClient(new NetHttpBinding(BasicHttpSecurityMode.None), apiUrl))
+
+
+            using (var apiClient = new SMTPApiClient(SMTPApiClient.DefaultBinding, apiUrl))
             {
                 while (true)
                 {

@@ -86,7 +86,7 @@ namespace SimpleSMTP
         {
             var host = new ServiceHost(serviceInstance, url);
 
-            var endpt = host.AddServiceEndpoint(typeof(ISMTPTestService), new NetHttpBinding(BasicHttpSecurityMode.None), "/mail");
+            var endpt = host.AddServiceEndpoint(typeof(ISMTPTestService), SMTPApiClient.DefaultBinding, "/mail");
 
             var smb = new ServiceMetadataBehavior();
             smb.HttpGetEnabled = true;
