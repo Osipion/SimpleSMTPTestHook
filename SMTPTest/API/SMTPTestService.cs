@@ -1,13 +1,9 @@
-﻿using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SMTPTest.API
+﻿namespace SMTPTest.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ServiceModel;
+
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, 
         InstanceContextMode = InstanceContextMode.Single, 
         IncludeExceptionDetailInFaults = true)]

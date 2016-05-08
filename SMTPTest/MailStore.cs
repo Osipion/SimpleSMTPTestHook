@@ -1,12 +1,11 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SMTPTest
+﻿namespace SMTPTest
 {
+    using MongoDB.Bson;
+    using MongoDB.Driver;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public class MailStore : IMailReciever, IMailSource
     {
         private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MailStore));
@@ -29,7 +28,6 @@ namespace SMTPTest
 
             logger.Info($"MailStore initialized and connected to mongodb server on {serverDetails}.");
         }
-
 
         public void Accept(Mail mail)
         {

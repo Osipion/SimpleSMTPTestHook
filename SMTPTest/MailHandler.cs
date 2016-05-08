@@ -1,10 +1,10 @@
-﻿using System;
-using System.Net.Mail;
-using System.Net.Sockets;
-using System.Text;
-
-namespace SMTPTest
+﻿namespace SMTPTest
 {
+    using System;
+    using System.Net.Mail;
+    using System.Net.Sockets;
+    using System.Text;
+
     public class MailHandler
     {
         private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MailHandler));

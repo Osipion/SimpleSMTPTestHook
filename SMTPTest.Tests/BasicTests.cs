@@ -1,19 +1,17 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using SMAIL = System.Net.Mail;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-using static System.Console;
-using System.Collections.Concurrent;
-
-namespace SMTPTest.Tests
+﻿namespace SMTPTest.Tests
 {
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using static System.Console;
+    using SMAIL = System.Net.Mail;
+
     [TestFixture]
     public class BasicTests
     {
@@ -74,29 +72,22 @@ namespace SMTPTest.Tests
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            var start = DateTime.UtcNow;
-            var store = new MockStore();
-            var server = new MailServer(new IPEndPoint(IPAddress.Any, 25), store, Encoding.ASCII);
-
             const int senderTasks = 10;
 
-            try
+            var start = DateTime.UtcNow;
+            var store = new MockStore();
+
+            using (var server = new MailServer(new IPEndPoint(IPAddress.Any, 25), store, Encoding.ASCII))
             {
                 var tasks = new Task<int>[senderTasks];
                 var random = new Random();
 
                 for (var i = 0; i < senderTasks; i++)
-                {
                     tasks[i] = sendDelayedMailAsync(i, random);
-                }
 
                 Task.WaitAll(tasks);
 
                 Assert.That(store.Mail.Count, Is.EqualTo(senderTasks));
-            }
-            finally
-            {
-                server.Stop();
             }
         }
 

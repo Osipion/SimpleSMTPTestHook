@@ -1,18 +1,14 @@
-﻿using MongoDB.Driver;
-using SMTPTest;
-using SMTPTest.API;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleSMTP
+﻿namespace SimpleSMTP
 {
+    using MongoDB.Driver;
+    using SMTPTest;
+    using SMTPTest.API;
+    using System;
+    using System.Net;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.Text;
+
     class Program
     {
         private static log4net.ILog logger = log4net.LogManager.GetLogger("MAIN");

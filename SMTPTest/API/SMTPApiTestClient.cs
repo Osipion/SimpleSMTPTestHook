@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SMTPTest.API
+﻿namespace SMTPTest.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ServiceModel;
+
     public class SMTPApiClient : ISMTPTestService, IDisposable
     {
 
@@ -34,9 +30,6 @@ namespace SMTPTest.API
             
         }
 
-
-
-
         #region IDisposable Support
         private bool isDisposed = false;
 
@@ -53,6 +46,7 @@ namespace SMTPTest.API
         {
             this.Dispose(true);
         }
+        #endregion
 
         public IEnumerable<Mail> GetRecentMailFor(string address, int max)
         {
@@ -73,6 +67,5 @@ namespace SMTPTest.API
         {
             return service.DeleteMailBetween(start, end);
         }
-        #endregion
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Runtime.Serialization;
-
-namespace SMTPTest
+﻿namespace SMTPTest
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Mail;
+    using System.Runtime.Serialization;
+
     [Serializable, DataContract]
     public class Mail
     {
