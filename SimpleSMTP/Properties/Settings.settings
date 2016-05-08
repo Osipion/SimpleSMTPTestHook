@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SimpleSMTP.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SMTPPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="APIPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">19751</Value>
+    </Setting>
+    <Setting Name="DBName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">test</Value>
+    </Setting>
+    <Setting Name="MailCollection" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mails</Value>
+    </Setting>
+    <Setting Name="SMTPEncoding" Type="System.String" Scope="User">
+      <Value Profile="(Default)">utf-8</Value>
+    </Setting>
+    <Setting Name="SMTPRecieveTimeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="ApiMaxMailPerRequest" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
