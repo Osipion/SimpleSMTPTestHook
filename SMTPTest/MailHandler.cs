@@ -52,7 +52,7 @@ namespace SMTPTest
 
         private void handle()
         {
-            this.write(SmtpStatusCode.ServiceReady, "localhost Test Mail Service Ready");
+            this.write(SmtpStatusCode.ServiceReady, "localhost Test Mail Service Ready ESMTP");
 
             var greeting = this.read().Trim();
 
@@ -66,9 +66,7 @@ namespace SMTPTest
             if (greeting.Length > 4)
                 this.write($"250-localhost greets {greeting.Substring(4).Trim()}");
 
-            this.write("250 OK");
-
-            //further headers here (e.g. 250-DSN, 250-8BITMIME etc)
+            this.write(SmtpStatusCode.Ok, "OK");
 
             var command = this.read().Trim();
 

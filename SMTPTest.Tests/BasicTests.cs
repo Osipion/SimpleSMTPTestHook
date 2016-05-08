@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using static System.Console;
+using System.Collections.Concurrent;
 
 namespace SMTPTest.Tests
 {
@@ -19,8 +20,8 @@ namespace SMTPTest.Tests
 
         private class MockStore : IMailReciever
         {
-            public List<Mail> Mail { get; } = new List<SMTPTest.Mail>();
-            public void Accept(Mail mail) => this.Mail.Add(mail);
+            public ConcurrentQueue<Mail> Mail { get; } = new ConcurrentQueue<SMTPTest.Mail>();
+            public void Accept(Mail mail) => this.Mail.Enqueue(mail);
         }
 
 
@@ -41,11 +42,12 @@ namespace SMTPTest.Tests
             finally
             {
                 this.isWaiting = false;
+                listener.Stop();
             }
         }
 
         [Test]
-        public void TestMethod()
+        public void MailHandlerHandlesBasicRequest()
         {
             var pipe = new MockStore();
 
@@ -68,7 +70,7 @@ namespace SMTPTest.Tests
         }
 
         [Test]
-        public void Experiment()
+        public void MailServerHandlesMultipleRequests()
         {
             log4net.Config.XmlConfigurator.Configure();
 
@@ -76,26 +78,40 @@ namespace SMTPTest.Tests
             var store = new MockStore();
             var server = new MailServer(new IPEndPoint(IPAddress.Any, 25), store, Encoding.ASCII);
 
+            const int senderTasks = 10;
+
             try
             {
-                for (var i = 0; i < 10; i++)
+                var tasks = new Task<int>[senderTasks];
+                var random = new Random();
+
+                for (var i = 0; i < senderTasks; i++)
                 {
-                    using (var client = new SMAIL.SmtpClient("localhost"))
-                    {
-                        client.Send("test1@mail.fakedom", "test2@mail.fakedom", "subject", "body");
-                    }
+                    tasks[i] = sendDelayedMailAsync(i, random);
                 }
 
-                Thread.Sleep(2000);
+                Task.WaitAll(tasks);
 
-                Assert.That(store.Mail.Count, Is.EqualTo(10));
+                Assert.That(store.Mail.Count, Is.EqualTo(senderTasks));
             }
             finally
             {
                 server.Stop();
             }
+        }
 
+        private async Task<int> sendDelayedMailAsync(int id, Random r)
+        {
+            await Task.Delay(r.Next(30));
 
+            using (var client = new SMAIL.SmtpClient("localhost"))
+            {
+                client.Send("test1@mail.fakedom", "test2@mail.fakedom", "subject", "body");
+            }
+
+            Console.WriteLine($"Sent mail {id}");
+
+            return id;
         }
     }
 }
