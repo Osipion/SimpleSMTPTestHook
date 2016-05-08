@@ -12,7 +12,6 @@ namespace SMTPTest
         private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MailStore));
 
         private readonly MongoClient dbClient;
-
         private readonly string dbName;
         private readonly string collectionName;
 

@@ -37,7 +37,7 @@ namespace TestClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.1.3:19751/api/mail")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:19751/api/mail")]
         public global::System.Uri SMTPApiUrl {
             get {
                 return ((global::System.Uri)(this["SMTPApiUrl"]));
